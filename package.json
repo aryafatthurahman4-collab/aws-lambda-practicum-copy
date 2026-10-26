@@ -1,0 +1,20 @@
+{
+  "name": "pert-5-aws-lambda",
+  "version": "1.0.0",
+  "description": "AWS Lambda Praktikum Pertemuan 5 - Cloud Computing",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node local_server.mjs",
+    "test": "node local_server.mjs & curl -i http://localhost:3000"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "serverless",
+    "wsl2",
+    "docker"
+  ],
+  "author": "Praktikum Cloud Computing",
+  "license": "MIT"
+}

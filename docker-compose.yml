@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # LocalEmu - AWS Cloud Emulator
+  localemu:
+    image: localemu/localemu:latest
+    container_name: localemu
+    ports:
+      - "4566:4566"      # Main gateway
+      - "4510-4559:4510-4559"  # External service ports
+    environment:
+      - DASHBOARD_API_OPEN=1
+      - PERSISTENCE=1
+      - IAM_ENFORCEMENT=0
+    volumes:
+      - localemu-data:/var/lib/localemu
+      - /var/run/docker.sock:/var/run/docker.sock
+    user: root
+    networks:
+      - aws-local
+
+  # RDS MySQL (Simulation)
+  mysql:
+    image: mysql:8.0
+    container_name: rds-mysql-local
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: lambda_db
+      MYSQL_USER: lambda_user
+      MYSQL_PASSWORD: lambda_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - aws-local
+
+  # Simple web server untuk testing
+  lambda-web:
+    build: .
+    container_name: lambda-web-local
+    ports:
+      - "9000:9000"
+    depends_on:
+      - localemu
+    networks:
+      - aws-local
+
+volumes:
+  localemu-data:
+  mysql-data:
+
+networks:
+  aws-local:
+    driver: bridge

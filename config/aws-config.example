@@ -1,0 +1,22 @@
+# AWS CLI Configuration
+# Copy file ini ke aws-config dan sesuaikan dengan kebutuhan Anda
+
+[profile local]
+region = us-east-1
+output = json
+# Endpoint untuk LocalEmu (Emulator Lokal)
+endpoint_url = http://localhost:4566
+
+[profile default]
+region = ap-southeast-3  # Jakarta
+output = json
+
+# Untuk RDS
+[profile rds]
+region = ap-southeast-3
+output = json
+
+# Untuk EC2
+[profile ec2]
+region = ap-southeast-3
+output = json

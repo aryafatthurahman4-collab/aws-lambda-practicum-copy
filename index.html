@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello from AWS Lambda!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background-color: #f8f9fa;
+      color: #16191f;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(180deg, #161e2e 0%, #1c2738 100%);
+      color: #ffffff;
+      padding: 60px 20px 45px;
+      text-align: center;
+      border-bottom: 4px solid #ff9900;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    header p {
+      font-size: 1.15rem;
+      color: #aab7b8;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 40px 50px;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    }
+    .intro {
+      font-size: 1.05rem;
+      color: #4a5568;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #16191f;
+      margin-bottom: 18px;
+    }
+    .steps-list, .examples-list {
+      list-style: none;
+      margin-bottom: 35px;
+    }
+    .steps-list li {
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+    .steps-list li strong {
+      color: #0073bb;
+    }
+    .examples-list li {
+      margin-bottom: 12px;
+      font-size: 1.02rem;
+    }
+    .examples-list li a {
+      color: #0073bb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .examples-list li a:hover {
+      text-decoration: underline;
+    }
+    .examples-list li span {
+      color: #0073bb;
+      font-weight: bold;
+      margin-right: 6px;
+    }
+    .badge-info {
+      background: #e7f3ff;
+      border-left: 4px solid #0073bb;
+      padding: 16px 20px;
+      border-radius: 4px;
+      margin-top: 30px;
+      font-size: 0.95rem;
+      color: #0d3c61;
+    }
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #879596;
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Hello from AWS Lambda!</h1>
+    <p>Dipanggil melalui AWS Lambda Function URL dari Ubuntu/Kali Linux di WSL 2</p>
+  </header>
+
+  <div class="container">
+    <div class="intro">
+      <p>This is a learning example. Our customers use Lambda to run web and mobile backends, microservices, process streams in real time, run big data processing or ML inference workloads, and much more.</p>
+      <p style="margin-top:12px;font-weight:600;color:#161e2e;">Hello from AWS Lambda in Kali Linux Ubuntu WSL 2</p>
+    </div>
+
+    <h2>Now let's dig into some code to make this page dynamic:</h2>
+    <ul class="steps-list">
+      <li><strong>Step 1:</strong> Read user input in your Lambda function</li>
+      <li><strong>Step 2:</strong> Store the input in a serverless database</li>
+      <li><strong>Step 3:</strong> Render the content from the database</li>
+    </ul>
+
+    <h2>Request Information</h2>
+    <ul class="examples-list">
+      <li><span>&gt;&gt;</span> Method: {{METHOD}}</li>
+      <li><span>&gt;&gt;</span> Path: {{PATH}}</li>
+      <li><span>&gt;&gt;</span> User Agent: {{USER_AGENT}}</li>
+      <li><span>&gt;&gt;</span> Timestamp: {{TIMESTAMP}}</li>
+    </ul>
+
+    <h2>Ready to build more with Lambda?</h2>
+    <p style="margin-bottom: 15px; color: #4a5568;">Here are a few examples you can try:</p>
+    <ul class="examples-list">
+      <li><span>&gt;&gt;</span> <a href="#web">Web, mobile, and microservices</a></li>
+      <li><span>&gt;&gt;</span> <a href="#kinesis">Live-process Kinesis data streams</a></li>
+      <li><span>&gt;&gt;</span> <a href="#kafka">Live-process Kafka data streams</a></li>
+      <li><span>&gt;&gt;</span> <a href="#bigdata">Process big data, run scheduled tasks, automate workflows</a></li>
+    </ul>
+
+    <div class="badge-info">
+      <strong>Praktikum Pertemuan 5 - Cloud Computing:</strong><br>
+      Fungsi AWS Lambda ini menyajikan halaman HTML melalui HTTP Function URL tanpa perlu mengelola server (serverless).
+      WSL 2 digunakan sebagai klien untuk mengakses dan menguji URL tersebut.
+    </div>
+  </div>
+
+  <footer>
+    &copy; Praktikum Cloud Computing - AWS Lambda &bull; Lab Software Unsada<br>
+    Powered by AWS Lambda Function URL &bull; Accessed from WSL 2 (Ubuntu/Kali Linux)
+  </footer>
+
+</body>
+</html>

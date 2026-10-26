@@ -1,0 +1,418 @@
+# PANDUAN LENGKAP & PRAKTIKUM PERT 5: AWS LAMBDA TANPA AKUN AWS
+**Mata Kuliah**: Komputasi Awan (Cloud Computing)  
+**Materi**: Pertemuan 5 - AWS Lambda (Serverless Web App & Function URL)  
+**Metode**: Simulasi Lokal Menggunakan Docker / Node.js di WSL 2 (Ubuntu / Kali Linux)  
+
+---
+
+## 1. Menjawab Masalah: "Saya Tidak Punya Akun AWS & Token AI Habis, File-nya Masuk ke Mana di Ubuntu?"
+
+### A. Lokasi File di Ubuntu (WSL 2)
+Anda **TIDAK PERLU repot memindahkan file**!  
+Windows dan Ubuntu WSL 2 sudah terhubung langsung melalui folder mount `/mnt/c/`.
+
+* **Di Windows**: `C:\laragon\www\Pert 5 - Lambda`
+* **Di Ubuntu WSL 2**: `/mnt/c/laragon/www/Pert 5 - Lambda`
+
+Cukup buka terminal Ubuntu Anda, lalu ketik:
+```bash
+cd "/mnt/c/laragon/www/Pert 5 - Lambda"
+ls -la
+```
+Semua file (`index.mjs`, `index.html`, `Dockerfile`, dll.) sudah langsung ada di sana!
+
+---
+
+## 2. Cara Menjalankan Tugas Tanpa Akun AWS
+
+Dosen Anda di video mendemokan 2 hal utama:
+1. **Status Aktif**: Membuka link Function URL dan melihat halaman web **"Hello from AWS Lambda!"**.
+2. **Status Hapus (Delete & Confirm)**: Menghapus Function URL dengan mengetik **"confirm"**, sehingga saat halaman direfresh muncul tulisan JSON: **`{"Message":null}`** (lihat video menit 10:18 - 10:31).
+
+Anda bisa mereplikasi seluruh tahapan ini 100% di Ubuntu WSL 2 dengan simulator yang sudah saya siapkan:
+
+### Langkah A: Menjalankan di Terminal Ubuntu WSL 2
+Buka terminal Ubuntu WSL 2:
+```bash
+cd "/mnt/c/laragon/www/Pert 5 - Lambda"
+node local_server.mjs
+```
+*(Atau menggunakan Docker: `docker build -t lambda-pert5 . && docker run -it --rm -p 9000:9000 lambda-pert5`)*
+
+---
+
+### Langkah B: Pengujian 1 - Halaman "Hello from AWS Lambda!" (Aktif)
+1. Buka browser di laptop Anda (Chrome/Edge/Firefox).
+2. Akses alamat:
+   ```
+   http://localhost:9000
+   ```
+3. **Hasil**: Halaman web bertuliskan **"Hello from AWS Lambda! The blueprint function you created rendered this page"** akan tampil persis seperti di video dosen menit 08:26.
+4. **Screenshot 1**: Ambil tangkapan layar ini untuk bukti tugas pertama Anda.
+
+---
+
+### Langkah C: Pengujian 2 - Simulasi Hapus Function URL ("confirm" & "delete")
+1. Kembali ke terminal Ubuntu yang sedang menjalankan `local_server.mjs`.
+2. Ketik kata:
+   ```
+   confirm
+   ```
+   lalu tekan **ENTER**.
+3. Di terminal akan muncul notifikasi bahwa Function URL telah dihapus.
+4. Kembali ke browser Anda dan **REFRESH halaman `http://localhost:9000`**.
+5. **Hasil**: Halaman akan menampilkan teks:
+   ```json
+   {"Message":null}
+   ```
+   Tampilan ini **identik 100% dengan video dosen menit 10:31** saat Function URL sudah dihapus!
+6. **Screenshot 2**: Ambil tangkapan layar browser ini dan tangkapan layar terminal Anda saat mengetik `confirm` sebagai bukti tugas kedua.
+
+---
+
+## 3. Jika Ingin Menggunakan Docker Resmi AWS Lambda (RIE)
+Jika dosen mengharuskan penggunaan Docker base image resmi AWS (`public.ecr.aws/lambda/nodejs:20`):
+
+1. **Jalankan container**:
+   ```bash
+   cd "/mnt/c/laragon/www/Pert 5 - Lambda"
+   docker build -t lambda-lokal .
+   docker run --rm -p 9000:9000 lambda-lokal
+   ```
+2. **Uji dari terminal kedua menggunakan curl**:
+   ```bash
+   curl -i http://localhost:9000
+   ```
+
+---
+
+## 4. Struktur File di Folder Praktikum Ini
+
+- [index.mjs](file:///c:/laragon/www/Pert%205%20-%20Lambda/index.mjs): Handler fungsi AWS Lambda (Node.js ES Module).
+- [index.html](file:///c:/laragon/www/Pert%205%20-%20Lambda/index.html): Template halaman *"Hello from AWS Lambda!"*.
+- [local_server.mjs](file:///c:/laragon/www/Pert%205%20-%20Lambda/local_server.mjs): Simulator runtime HTTP AWS Lambda untuk pengujian lokal di Windows/WSL2/Linux.
+- [Dockerfile](file:///c:/laragon/www/Pert%205%20-%20Lambda/Dockerfile): Konfigurasi Docker container jika ingin dijalankan di Docker WSL 2.
+- [confirm_delete.sh](file:///c:/laragon/www/Pert%205%20-%20Lambda/confirm_delete.sh): Script simulasi "confirm & delete" sesuai video.
+- [test_lambda.sh](file:///c:/laragon/www/Pert%205%20-%20Lambda/test_lambda.sh): Script bash untuk testing via `curl` di terminal Kali Linux / Ubuntu.
+- [package.json](file:///c:/laragon/www/Pert%205%20-%20Lambda/package.json): Definisi paket Node.js.
+
+---
+
+## 5. Panduan Alternatif: Jalankan Tanpa Akun AWS (Solusi Lengkap)
+
+### Masalah: Token AWS habis, tidak bisa akses AWS Console?
+Jika akun AWS Anda sudah habis kuotanya atau tidak bisa login, Anda tetap bisa menyelesaikan tugas ini dengan menjalankan Lambda function **secara lokal** di Ubuntu/WSL 2 menggunakan Node.js atau Docker.
+
+### Solusi A: Jalankan Langsung dengan Node.js (Rekomendasi - Paling Mudah)
+
+#### Di Windows:
+1. Pastikan Node.js sudah terinstall (cek dengan `node --version`)
+2. Buka terminal di folder proyek:
+   ```bash
+   cd "C:\laragon\www\Pert 5 - Lambda"
+   ```
+3. Jalankan server lokal:
+   ```bash
+   npm start
+   # atau:
+   node local_server.mjs
+   ```
+4. Buka browser: `http://localhost:3000`
+5. Output akan sama persis dengan AWS Lambda!
+
+#### Di WSL 2 (Ubuntu/Kali Linux):
+1. Buka terminal WSL 2
+2. Masuk ke folder proyek:
+   ```bash
+   cd "/mnt/c/laragon/www/Pert 5 - Lambda"
+   ```
+3. Pastikan Node.js terinstall:
+   ```bash
+   node --version
+   # Jika belum, install: sudo apt update && sudo apt install nodejs npm
+   ```
+4. Jalankan server:
+   ```bash
+   node local_server.mjs
+   ```
+5. Test dari terminal lain:
+   ```bash
+   curl -i http://localhost:3000
+   ```
+
+### Solusi B: Jalankan dengan Docker Container
+
+#### Di WSL 2 (Ubuntu/Kali Linux):
+1. Pastikan Docker sudah terinstall dan berjalan:
+   ```bash
+   docker --version
+   docker ps
+   ```
+2. Build image:
+   ```bash
+   cd "/mnt/c/laragon/www/Pert 5 - Lambda"
+   docker build -t lambda-lokal .
+   ```
+3. Jalankan container:
+   ```bash
+   docker run -d -p 3000:3000 --name lambda-container lambda-lokal
+   ```
+4. Test:
+   ```bash
+   curl -i http://localhost:3000
+   ```
+5. Lihat logs:
+   ```bash
+   docker logs lambda-container
+   ```
+
+### Solusi C: Simulasi "Confirm & Delete" (Sesuai Video)
+
+Script `confirm_delete.sh` mensimulasikan proses menghapus Function URL dan Lambda function seperti di video:
+
+```bash
+# Dari WSL 2 / Ubuntu:
+cd "/mnt/c/laragon/www/Pert 5 - Lambda"
+chmod +x confirm_delete.sh
+./confirm_delete.sh
+```
+
+Script ini akan:
+1. Meminta Anda mengetik "confirm" untuk simulasi delete Function URL
+2. Meminta Anda mengetik nama function untuk simulasi delete function
+3. Menampilkan informasi cara menghentikan server lokal (sesuai environment Anda)
+
+### Apa Perbedaannya dengan AWS Asli?
+
+| Fitur | AWS Lambda Asli | Setup Lokal (Tanpa Akun) |
+|-------|----------------|------------------------|
+| Function URL | HTTPS endpoint public | http://localhost:3000 |
+| Runtime | AWS managed runtime | Node.js di komputer Anda |
+| Biaya | Per milidetik eksekusi | Gratis (resource lokal) |
+| Scalability | Auto-scale | 1 instance saja |
+| Delete | Ketik "confirm" di console | Stop server/Ctrl+C |
+| Tujuan | Production | Development/Learning |
+
+### Output yang Sama
+
+Baik di AWS asli maupun lokal, output akan **identik**:
+- HTML dengan "Hello from AWS Lambda!"
+- Pesan "Hello from AWS Lambda in Kali Linux Ubuntu WSL 2"
+- Informasi request (method, path, user agent, timestamp)
+- Styling yang sama persis
+
+### Bukti untuk Tugas
+
+Untuk membuktikan ke dosen bahwa Anda telah menyelesaikan tugas:
+
+1. **Screenshot output HTML** dari browser (localhost:3000)
+2. **Screenshot terminal** yang menunjukkan server berjalan
+3. **Screenshot curl** dari WSL 2 yang menampilkan HTTP 200
+4. **Screenshot script confirm_delete.sh** yang menunjukkan simulasi delete
+
+Semua ini bisa dilakukan **tanpa akun AWS**!
+
+---
+
+## 6. Format Laporan yang Dikumpulkan ke Edlink
+Gunakan file [LAPORAN_TUGAS_EDLINK.md](file:///c:/laragon/www/Pert%205%20-%20Lambda/LAPORAN_TUGAS_EDLINK.md) yang sudah tersedia di folder ini. Cukup masukkan Nama, NIM, dan tempelkan tangkapan layar hasil pengujian di atas.
+
+---
+
+## 7. Setup Menggunakan LocalEmu (Full AWS Emulator - Rekomendasi)
+
+LocalEmu adalah emulator AWS open-source yang mensimulasikan 133+ layanan AWS (Lambda, EC2, RDS, S3, dll) secara lokal tanpa perlu akun AWS.
+
+### Keuntungan LocalEmu:
+- ✅ Mensimulasikan Lambda dengan **real AWS runtime images**
+- ✅ Mendukung EC2, RDS, S3, DynamoDB, dan 120+ layanan lainnya
+- ✅ Gratis, tidak perlu akun AWS
+- ✅ Dashboard web untuk monitoring real-time
+- ✅ Persistence data (bisa disimpan antar restart)
+- ✅ IAM enforcement (opsional)
+
+### Cara Setup LocalEmu:
+
+#### Option A: Menggunakan Script (Rekomendasi)
+```bash
+cd "/mnt/c/laragon/www/Pert 5 - Lambda"
+bash localemu-setup.sh
+```
+
+#### Option B: Menggunakan Docker Compose
+```bash
+cd "/mnt/c/laragon/www/Pert 5 - Lambda"
+docker-compose up -d localemu
+```
+
+#### Option C: Manual Docker Run
+```bash
+docker run --rm -d --name localemu \
+    -p 4566:4566 \
+    -p 4510-4559:4510-4559 \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --group-add docker \
+    -e DASHBOARD_API_OPEN=1 \
+    -e PERSISTENCE=1 \
+    -v localemu-data:/var/lib/localemu \
+    localemu/localemu:latest
+```
+
+### Cek LocalEmu Berjalan:
+```bash
+curl http://localhost:4566/_localemu/health
+```
+
+### Buka Dashboard LocalEmu:
+**http://localhost:4566/_localemu/dashboard**
+
+Dashboard menampilkan:
+- Status semua layanan AWS
+- Resource counts (Lambda functions, S3 buckets, EC2 instances, dll)
+- Activity feed real-time
+- S3 object browser
+- DynamoDB item viewer
+- CloudTrail event history
+
+### Deploy Lambda ke LocalEmu:
+```bash
+cd "/mnt/c/laragon/www/Pert 5 - Lambda"
+bash deploy-lambda-localemu.sh
+```
+
+Script ini akan:
+1. Membuat IAM role untuk Lambda
+2. Membuat ZIP deployment package
+3. Create Lambda function
+4. Create Function URL
+5. Menampilkan Function URL untuk testing
+
+### Test Lambda:
+```bash
+# Get Function URL
+aws lambda get-function-url-config \
+    --function-name lambda-wsl-tutorial \
+    --query FunctionUrl \
+    --output text
+
+# Test dengan curl
+curl -i <FUNCTION_URL>
+```
+
+### Simulasi Delete (Confirm & Delete):
+```bash
+bash delete-lambda-localemu.sh
+```
+
+Script ini akan:
+1. Meminta ketik "confirm" untuk delete Function URL
+2. Meminta ketik nama function untuk delete function
+3. Menghapus Function URL dan Lambda function
+
+### Dokumentasi Lengkap:
+Lihat file **GUIDE_LOCALEMU.md** untuk panduan lengkap:
+- Setup LocalEmu
+- Deploy Lambda function
+- Setup EC2 dengan Terraform
+- Setup RDS dengan Terraform
+- Konfigurasi AWS credentials
+- Monitoring & debugging
+- Troubleshooting
+
+---
+
+## 8. Struktur Folder & Konfigurasi
+
+### Folder Utama:
+```
+Pert 5 - Lambda/
+├── config/                          # Konfigurasi AWS (pisah)
+│   ├── aws-credentials.example      # Template credentials
+│   ├── aws-config.example          # Template config
+│   ├── ec2/                        # Konfigurasi EC2
+│   │   └── instance-config.tf      # Terraform EC2
+│   └── rds/                        # Konfigurasi RDS
+│       └── database-config.tf      # Terraform RDS
+├── index.mjs                       # Lambda handler
+├── index.html                      # HTML template
+├── local_server.mjs                # Simulator lokal sederhana
+├── localemu-setup.sh               # Setup LocalEmu
+├── deploy-lambda-localemu.sh       # Deploy Lambda ke LocalEmu
+├── delete-lambda-localemu.sh       # Delete Lambda (confirm & delete)
+├── docker-compose.yml              # Docker Compose untuk semua service
+├── Dockerfile                      # Docker image untuk Lambda
+├── setup-wsl.sh                    # Menu setup WSL 2
+├── GUIDE_LOCALEMU.md               # Panduan lengkap LocalEmu
+├── PANDUAN_SETUP.md                # Panduan setup AWS Console
+├── README.md                       # File ini
+└── LAPORAN_TUGAS_EDLINK.md         # Template laporan
+```
+
+### Konfigurasi AWS (Di Folder config/):
+- **aws-credentials.example** - Template untuk AWS credentials (LocalEmu dan AWS asli)
+- **aws-config.example** - Template untuk AWS config (profiles untuk berbagai layanan)
+- **ec2/instance-config.tf** - Terraform untuk EC2 instance
+- **rds/database-config.tf** - Terraform untuk RDS database
+
+### Cara Menggunakan Konfigurasi:
+```bash
+# Copy template
+cp config/aws-credentials.example config/aws-credentials
+cp config/aws-config.example config/aws-config
+
+# Edit file sesuai kebutuhan
+nano config/aws-credentials
+nano config/aws-config
+```
+
+### Setup EC2 dengan Terraform:
+```bash
+cd config/ec2
+terraform init
+terraform plan
+terraform apply
+```
+
+### Setup RDS dengan Terraform:
+```bash
+cd config/rds
+terraform init
+terraform plan
+terraform apply
+```
+
+---
+
+## 9. Menu Setup Cepat
+
+Gunakan script `setup-wsl.sh` untuk memilih metode setup:
+
+```bash
+cd "/mnt/c/laragon/www/Pert 5 - Lambda"
+bash setup-wsl.sh
+```
+
+Pilihan:
+1. **LocalEmu** - Full AWS Emulator (133+ layanan)
+2. **Docker Simple** - Hanya Lambda simulator
+3. **Buka panduan** - Lihat dokumentasi lengkap
+
+---
+
+## 10. Perbandingan Metode
+
+| Metode | Layanan | Complexity | Rekomendasi |
+|--------|---------|------------|-------------|
+| **LocalEmu** | 133+ layanan (Lambda, EC2, RDS, S3, dll) | Medium | ✅ Best untuk praktikum lengkap |
+| **Docker Simple** | Hanya Lambda simulator | Low | ✅ Best untuk tugas Lambda saja |
+| **Node.js Direct** | Hanya Lambda simulator | Very Low | ❌ Tidak mensimulasikan AWS environment |
+
+---
+
+## 11. Link Penting
+
+- [LocalEmu Documentation](https://localemu.cloud/docs)
+- [LocalEmu GitHub](https://github.com/localemu/localemu)
+- [AWS Lambda Documentation](https://docs.aws.amazon.com/lambda/)
+- [Docker Hub - LocalEmu](https://hub.docker.com/r/localemu/localemu)
+- [AWS Builder Center - Run Lambda Locally](https://builder.aws.com/content/3EdXXOR8w0AxTVeyUh8m7Bm5qxo/run-real-aws-lambda-on-your-laptop)
