@@ -37,3 +37,11 @@ logs/
 # Temporary files
 *.tmp
 *.temp
+
+# Nested project copies live as separate repositories; do not embed here
+Amazon-Aws-KernelLinux-AMI - Copy/
+aws billing qween 3 32b/
+aws rds/
+grafana/
+k8s/
+nginx/
