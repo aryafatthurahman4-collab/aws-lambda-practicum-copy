@@ -1,4 +1,38 @@
 
+<!-- identity-block -->
+<div align="center">
+
+# aws-lambda-practicum-copy
+
+<sub>Praktikum AWS Lambda dengan LocalStack - terraform, emulator, dan skrip deploy serverless lokal.</sub>
+
+</div>
+
+## At a glance
+
+| Field | Detail |
+| --- | --- |
+| Repository | aws-lambda-practicum-copy |
+| Primary language | Shell |
+| Topics | aws, docker, lambda, localstack, praktikum, serverless, shell, terraform |
+| License | MIT |
+| Branch | main |
+| Maintainer | [@devarent](https://github.com/devarent) |
+
+## Overview
+
+aws-lambda-practicum-copy is a hands-on repository focused on: Praktikum AWS Lambda dengan LocalStack - terraform, emulator, dan skrip deploy serverless lokal.. Primary language: Shell. Topics: aws, docker, lambda, localstack, praktikum, serverless, shell, terraform. The README below documents the project; use the table above for a quick overview.
+
+### Global references
+
+<div align="center">
+
+🇮🇸 Iceland &middot; 🇳🇿 New Zealand &middot; 🇨🇭 Switzerland &middot; 🇸🇮 Slovenia &middot; 🇮🇪 Ireland &middot; 🇦🇹 Austria &middot; 🇵🇹 Portugal &middot; 🇸🇬 Singapore &middot; 🇫🇮 Finland
+
+</div>
+
+---
+
 <!-- dbx-style-kit -->
 <div align="center">
 
