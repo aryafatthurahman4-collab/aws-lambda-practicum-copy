@@ -12,7 +12,7 @@
 <!-- identity-block -->
 <div align="center">
 
-# aws-lambda-practicum-copy
+# localstack-lambda-copy
 
 <sub>Praktikum AWS Lambda dengan LocalStack - terraform, emulator, dan skrip deploy serverless lokal.</sub>
 
@@ -22,7 +22,7 @@
 
 | Field | Detail |
 | --- | --- |
-| Repository | aws-lambda-practicum-copy |
+| Repository | localstack-lambda-copy |
 | Primary language | Shell |
 | Topics | aws, docker, lambda, localstack, praktikum, serverless, shell, terraform |
 | License | MIT |
@@ -31,7 +31,7 @@
 
 ## Overview
 
-aws-lambda-practicum-copy is a hands-on repository focused on: Praktikum AWS Lambda dengan LocalStack - terraform, emulator, dan skrip deploy serverless lokal.. Primary language: Shell. Topics: aws, docker, lambda, localstack, praktikum, serverless, shell, terraform. The README below documents the project; use the table above for a quick overview.
+localstack-lambda-copy is a hands-on repository focused on: Praktikum AWS Lambda dengan LocalStack - terraform, emulator, dan skrip deploy serverless lokal.. Primary language: Shell. Topics: aws, docker, lambda, localstack, praktikum, serverless, shell, terraform. The README below documents the project; use the table above for a quick overview.
 
 ### Global references
 
@@ -46,7 +46,7 @@ aws-lambda-practicum-copy is a hands-on repository focused on: Praktikum AWS Lam
 <!-- dbx-style-kit -->
 <div align="center">
 
-<img src="https://img.shields.io/badge/aws-lambda-practicum-copy-1f6feb?style=for-the-badge" alt="aws-lambda-practicum-copy" />
+<img src="https://img.shields.io/badge/localstack-lambda-copy-1f6feb?style=for-the-badge" alt="localstack-lambda-copy" />
 <img src="https://img.shields.io/badge/LANG%20Shell-3178c6?style=for-the-badge" alt="LANG Shell" />
 <img src="https://img.shields.io/badge/STARS%200-eab308?style=for-the-badge" alt="STARS 0" />
 <img src="https://img.shields.io/badge/LICENSE%20MIT-22c55e?style=for-the-badge" alt="LICENSE MIT" />
@@ -78,12 +78,12 @@ aws-lambda-practicum-copy is a hands-on repository focused on: Praktikum AWS Lam
 Anda **TIDAK PERLU repot memindahkan file**!  
 Windows dan Ubuntu WSL 2 sudah terhubung langsung melalui folder mount `/mnt/c/`.
 
-* **Di Windows**: `C:\laragon\www\aws-lambda-practicum-copy`
-* **Di Ubuntu WSL 2**: `/mnt/c/laragon/www/aws-lambda-practicum-copy`
+* **Di Windows**: `C:\laragon\www\localstack-lambda-copy`
+* **Di Ubuntu WSL 2**: `/mnt/c/laragon/www/localstack-lambda-copy`
 
 Cukup buka terminal Ubuntu Anda, lalu ketik:
 ```bash
-cd "/mnt/c/laragon/www/aws-lambda-practicum-copy"
+cd "/mnt/c/laragon/www/localstack-lambda-copy"
 ls -la
 ```
 Semua file (`index.mjs`, `index.html`, `Dockerfile`, dll.) sudah langsung ada di sana!
@@ -101,7 +101,7 @@ Anda bisa mereplikasi seluruh tahapan ini 100% di Ubuntu WSL 2 dengan simulator 
 ### Langkah A: Menjalankan di Terminal Ubuntu WSL 2
 Buka terminal Ubuntu WSL 2:
 ```bash
-cd "/mnt/c/laragon/www/aws-lambda-practicum-copy"
+cd "/mnt/c/laragon/www/localstack-lambda-copy"
 node local_server.mjs
 ```
 *(Atau menggunakan Docker: `docker build -t lambda-pert5 . && docker run -it --rm -p 9000:9000 lambda-pert5`)*
@@ -142,7 +142,7 @@ Jika dosen mengharuskan penggunaan Docker base image resmi AWS (`public.ecr.aws/
 
 1. **Jalankan container**:
    ```bash
-   cd "/mnt/c/laragon/www/aws-lambda-practicum-copy"
+   cd "/mnt/c/laragon/www/localstack-lambda-copy"
    docker build -t lambda-lokal .
    docker run --rm -p 9000:9000 lambda-lokal
    ```
@@ -176,7 +176,7 @@ Jika akun AWS Anda sudah habis kuotanya atau tidak bisa login, Anda tetap bisa m
 1. Pastikan Node.js sudah terinstall (cek dengan `node --version`)
 2. Buka terminal di folder proyek:
    ```bash
-   cd "C:\laragon\www\aws-lambda-practicum-copy"
+   cd "C:\laragon\www\localstack-lambda-copy"
    ```
 3. Jalankan server lokal:
    ```bash
@@ -191,7 +191,7 @@ Jika akun AWS Anda sudah habis kuotanya atau tidak bisa login, Anda tetap bisa m
 1. Buka terminal WSL 2
 2. Masuk ke folder proyek:
    ```bash
-   cd "/mnt/c/laragon/www/aws-lambda-practicum-copy"
+   cd "/mnt/c/laragon/www/localstack-lambda-copy"
    ```
 3. Pastikan Node.js terinstall:
    ```bash
@@ -217,7 +217,7 @@ Jika akun AWS Anda sudah habis kuotanya atau tidak bisa login, Anda tetap bisa m
    ```
 2. Build image:
    ```bash
-   cd "/mnt/c/laragon/www/aws-lambda-practicum-copy"
+   cd "/mnt/c/laragon/www/localstack-lambda-copy"
    docker build -t lambda-lokal .
    ```
 3. Jalankan container:
@@ -239,7 +239,7 @@ Script `confirm_delete.sh` mensimulasikan proses menghapus Function URL dan Lamb
 
 ```bash
 # Dari WSL 2 / Ubuntu:
-cd "/mnt/c/laragon/www/aws-lambda-practicum-copy"
+cd "/mnt/c/laragon/www/localstack-lambda-copy"
 chmod +x confirm_delete.sh
 ./confirm_delete.sh
 ```
@@ -302,13 +302,13 @@ LocalEmu adalah emulator AWS open-source yang mensimulasikan 133+ layanan AWS (L
 
 #### Option A: Menggunakan Script (Rekomendasi)
 ```bash
-cd "/mnt/c/laragon/www/aws-lambda-practicum-copy"
+cd "/mnt/c/laragon/www/localstack-lambda-copy"
 bash localemu-setup.sh
 ```
 
 #### Option B: Menggunakan Docker Compose
 ```bash
-cd "/mnt/c/laragon/www/aws-lambda-practicum-copy"
+cd "/mnt/c/laragon/www/localstack-lambda-copy"
 docker-compose up -d localemu
 ```
 
@@ -343,7 +343,7 @@ Dashboard menampilkan:
 
 ### Deploy Lambda ke LocalEmu:
 ```bash
-cd "/mnt/c/laragon/www/aws-lambda-practicum-copy"
+cd "/mnt/c/laragon/www/localstack-lambda-copy"
 bash deploy-lambda-localemu.sh
 ```
 
@@ -392,7 +392,7 @@ Lihat file **GUIDE_LOCALEMU.md** untuk panduan lengkap:
 
 ### Folder Utama:
 ```
-aws-lambda-practicum-copy/
+localstack-lambda-copy/
 ├── config/                          # Konfigurasi AWS (pisah)
 │   ├── aws-credentials.example      # Template credentials
 │   ├── aws-config.example          # Template config
@@ -455,7 +455,7 @@ terraform apply
 Gunakan script `setup-wsl.sh` untuk memilih metode setup:
 
 ```bash
-cd "/mnt/c/laragon/www/aws-lambda-practicum-copy"
+cd "/mnt/c/laragon/www/localstack-lambda-copy"
 bash setup-wsl.sh
 ```
 
@@ -488,7 +488,7 @@ Pilihan:
 
 ## Project Governance
 
-[![CI](https://github.com/devarent/aws-lambda-practicum-copy/actions/workflows/ci.yml/badge.svg)](https://github.com/devarent/aws-lambda-practicum-copy/actions/workflows/ci.yml)
+[![CI](https://github.com/devarent/localstack-lambda-copy/actions/workflows/ci.yml/badge.svg)](https://github.com/devarent/localstack-lambda-copy/actions/workflows/ci.yml)
 
 [Contributing](CONTRIBUTING.md) | [Security Policy](SECURITY.md) | [Code of Conduct](CODE_OF_CONDUCT.md)
 
